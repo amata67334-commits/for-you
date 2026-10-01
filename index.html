@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>จดหมายลับถึงคนพิเศษ 💌</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;700&family=Noto+Serif+Thai:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbf6f1; --bg2:#f6dfe2; --card:rgba(255,255,255,.88); --ink:#2a1a1d; --soft:#6d5256;
+  --wine:#5b001d; --rose:#bb0026; --blush:#ffd9e1; --line:#ecc9ce; --shadow:rgba(91,0,29,.18);
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1b0d12; --bg2:#34121d; --card:rgba(45,22,29,.9); --ink:#fbeef0; --soft:#d3b3b9;
+  --wine:#ffb2bb; --rose:#ff6b82; --blush:#4a1a29; --line:#5a2a36; --shadow:rgba(0,0,0,.5);}}
+:root[data-theme="dark"]{
+  --bg:#1b0d12; --bg2:#34121d; --card:rgba(45,22,29,.9); --ink:#fbeef0; --soft:#d3b3b9;
+  --wine:#ffb2bb; --rose:#ff6b82; --blush:#4a1a29; --line:#5a2a36; --shadow:rgba(0,0,0,.5);}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{margin:0;min-height:100%;overscroll-behavior:none}
+body{
+  font-family:"Noto Sans Thai","Plus Jakarta Sans",system-ui,sans-serif; color:var(--ink);
+  background:radial-gradient(circle at 20% 10%,var(--bg2),transparent 55%),
+             radial-gradient(circle at 85% 90%,var(--blush),transparent 50%),var(--bg);
+  background-attachment:fixed; line-height:1.7;
+}
+main{max-width:420px;margin:0 auto;padding:20px 16px 32px;min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2}
+.serif{font-family:"Noto Serif Thai","Playfair Display",Georgia,serif}
+.card{background:var(--card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:28px;box-shadow:0 18px 50px var(--shadow);padding:28px 22px;text-align:center}
+.hidden{display:none!important}
+h1,h2,h3{margin:0;color:var(--wine);line-height:1.4}
+h1{font-size:1.7rem}
+.sub{color:var(--soft);font-size:.95rem;margin:10px auto 0;max-width:290px}
+#music{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);right:12px;z-index:5;border:1px solid var(--line);background:var(--card);color:var(--wine);border-radius:999px;padding:7px 13px;font:inherit;font-size:.78rem;font-weight:500;cursor:pointer}
+button{font-family:inherit}
+button:focus-visible,.seal:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+
+/* sealed */
+.seal{width:104px;height:104px;margin:26px auto 8px;border-radius:50%;border:0;cursor:pointer;color:#ffd9e1;
+  background:radial-gradient(circle at 35% 30%,#e51936,#800f2f 62%,#5b001d);display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 5px var(--blush),0 10px 30px var(--shadow);animation:pulse 2.8s ease-in-out infinite;transition:transform .2s}
+.seal:active{transform:scale(.93)}
+.seal svg{width:44px;height:44px}
+@keyframes pulse{50%{box-shadow:0 0 0 9px var(--blush),0 0 44px rgba(229,25,54,.55)}}
+.hint{font-size:.78rem;color:var(--soft);margin-top:14px}
+
+/* letter */
+.line{opacity:0;transform:translateY(14px);transition:opacity .9s ease,transform .9s ease}
+.line.on{opacity:1;transform:none}
+.badge{display:inline-block;background:var(--blush);color:var(--wine);border-radius:999px;padding:4px 14px;font-size:.78rem;font-weight:500}
+.quote{margin:14px 0 6px;padding:16px 18px;border-radius:18px;background:var(--blush);border-left:4px solid var(--rose);text-align:left;font-size:1.02rem;color:var(--wine);font-style:italic}
+.big{font-size:1.25rem;font-weight:700;color:var(--rose);margin:6px 0 0}
+.rule{width:56px;height:3px;border-radius:3px;background:var(--line);margin:20px auto}
+.ask{font-size:1.1rem;font-weight:700;color:var(--wine);margin:0 0 6px}
+
+/* buttons */
+#arena{position:relative;height:130px;margin-top:6px}
+.btn{border:0;border-radius:999px;cursor:pointer;font-weight:700;color:#fff;background:linear-gradient(90deg,#800f2f,#e51936);
+  box-shadow:0 8px 20px var(--shadow);padding:13px 30px;font-size:1rem;transition:transform .2s}
+#yes{position:absolute;left:50%;top:6px;transform:translateX(-50%) scale(var(--s,1));transform-origin:center top;z-index:2}
+#yes:active{transform:translateX(-50%) scale(calc(var(--s,1)*.95))}
+#no{position:absolute;left:calc(50% + 10px);top:76px;z-index:1;background:var(--line);color:var(--soft);box-shadow:none;padding:9px 18px;font-size:.82rem;font-weight:500;transition:left .28s ease,top .28s ease,opacity .3s}
+#tease{height:20px;font-size:.8rem;color:var(--rose);margin:4px 0 0;font-weight:500}
+
+/* celebration */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0}
+.stat{background:var(--blush);border-radius:16px;padding:10px 4px}
+.stat b{display:block;font-size:1.15rem;color:var(--wine)}
+.stat span{font-size:.7rem;color:var(--soft)}
+.ghost{width:100%;border:1px solid var(--line);background:transparent;color:var(--wine);border-radius:999px;padding:10px;font-size:.85rem;cursor:pointer}
+
+#fx{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.heart{position:absolute;user-select:none;will-change:transform,opacity}
+footer{text-align:center;font-size:.72rem;color:var(--soft);margin-top:20px}
+@media (prefers-reduced-motion:reduce){.seal{animation:none}.line{transition:none;opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div id="fx" aria-hidden="true"></div>
+<button id="music" type="button" aria-pressed="false">🎵 เปิดเพลง</button>
+
+<main>
+  <!-- 1: sealed -->
+  <section class="card" id="sealed">
+    <span class="badge">🔒 ความลับสำหรับเธอคนเดียว</span>
+    <h1 class="serif" style="margin-top:14px">มีจดหมายลับส่งถึงเธอ...</h1>
+    <p class="sub">มีบางอย่างที่เก็บไว้ในหัวใจมานานแล้ว เธอพร้อมเปิดผนึกอ่านหรือยังคับ? ✨</p>
+    <button class="seal" id="seal" type="button" aria-label="เปิดผนึกจดหมาย">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    </button>
+    <p class="hint">แตะตราประทับเพื่อเปิดจดหมาย 💌</p>
+  </section>
+
+  <!-- 2: letter -->
+  <section class="card hidden" id="letter" aria-live="polite">
+    <div class="line"><span class="badge">💌 ความในใจที่อยากบอกมาตลอด</span></div>
+    <h2 class="serif line" style="font-size:1.55rem;margin:14px 0 4px">ถึงคนพิเศษของเค้า...</h2>
+    <p class="line" style="color:var(--soft);margin:0">คือเค้ามีบางอย่างอยากจะบอก...</p>
+    <div class="quote line">“ที่จริงตอนแรกที่เค้าบอกว่าจะเป็นแฟน... เค้ายังไม่ได้รักเธอเลยด้วยซ้ำ...”</div>
+    <p class="line" style="margin:12px 0 0">แต่พอได้เป็นจริงๆ มันก็ทำให้เค้ารักเธอจริงๆ</p>
+    <p class="line big serif">รักมากที่สุด... อยู่กับเค้าตลอดไปนะ ❤️</p>
+    <div class="rule line"></div>
+    <div class="line" id="askBox">
+      <p class="ask serif">อยู่ด้วยกันไปนานๆ นะคับ... ตกลงไหม?</p>
+      <div id="arena">
+        <button class="btn" id="yes" type="button">ตกลง ❤️</button>
+        <button class="btn" id="no" type="button">ไม่ 🥺</button>
+      </div>
+      <p id="tease" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- 3: celebration -->
+  <section class="card hidden" id="done">
+    <div style="font-size:3rem">🥰</div>
+    <h3 class="serif" style="font-size:1.45rem;margin:6px 0 10px">เย้! ขอบคุณนะคับ รักเธอที่สุดในโลกเลย 💕</h3>
+    <p style="color:var(--soft);margin:0">สัญญาแล้วนะว่าจะอยู่ด้วยกันตลอดไป<br>ห้ามทิ้งกันเด็ดขาดเลยนะ...<br>ขอบคุณที่เป็นความสุขและรอยยิ้มของเค้าในทุกๆ วัน 💕</p>
+    <div class="stats">
+      <div class="stat"><b id="days">14</b><span>วันที่รู้จักกัน</span></div>
+      <div class="stat"><b>100%</b><span>ความจริงใจ</span></div>
+      <div class="stat"><b>∞</b><span>รักตลอดไป</span></div>
+    </div>
+    <button class="ghost" id="replay" type="button">↺ อ่านจดหมายอีกครั้ง</button>
+  </section>
+
+  <footer>♡ เขียนด้วยความอบอุ่นและความรักทั้งหมดที่มี ♡</footer>
+</main>
+
+<script>
+(function(){
+  // ปรับแต่งได้: ใส่วันที่เริ่มคบกัน เช่น "2025-02-14" เพื่อให้นับวันจริง (เว้นว่างไว้ = แสดง 14)
+  var START_DATE = "";
+
+  var $ = function(id){return document.getElementById(id)};
+  var sealed=$("sealed"), letter=$("letter"), done=$("done"), fx=$("fx");
+  var yes=$("yes"), no=$("no"), tease=$("tease"), arena=$("arena"), musicBtn=$("music");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if(START_DATE){
+    var d = Math.floor((Date.now() - new Date(START_DATE).getTime())/86400000);
+    if(d>0) $("days").textContent = d.toLocaleString("th-TH");
+  }
+
+  /* ---------- hearts ---------- */
+  var chars=["❤️","💕","💖","🌸","✨","💗"];
+  function heart(x,y,burst){
+    var el=document.createElement("div");
+    el.className="heart"; el.textContent=chars[Math.floor(Math.random()*chars.length)];
+    var size=14+Math.random()*18;
+    el.style.cssText="left:"+x+"px;top:"+y+"px;font-size:"+size+"px";
+    fx.appendChild(el);
+    var dx=(Math.random()-.5)*(burst?280:90), dy=burst?-(120+Math.random()*260):-(160+Math.random()*220);
+    var anim=el.animate([{transform:"translate(0,0) scale(.6)",opacity:1},
+      {transform:"translate("+dx+"px,"+dy+"px) scale(1.15)",opacity:0}],
+      {duration:(burst?1400:3200)+Math.random()*1200,easing:"cubic-bezier(.2,.7,.3,1)"});
+    anim.onfinish=function(){el.remove()};
+  }
+  function burst(x,y,n){ if(reduce) return; for(var i=0;i<n;i++) setTimeout(function(){heart(x,y,true)},i*18); }
+  var ambient=null;
+  function startAmbient(){
+    if(reduce||ambient) return;
+    ambient=setInterval(function(){ if(!document.hidden) heart(Math.random()*innerWidth, innerHeight+10,false) },900);
+  }
+
+  /* ---------- music box (WebAudio, no external files) ---------- */
+  var ctx=null, playing=false, timer=null, step=0;
+  var notes=[659,784,988,880,784,659,587,659, 698,880,1047,988,880,698,659,587]; // อารมณ์กล่องดนตรีนุ่มๆ
+  function tone(f,t){
+    var o=ctx.createOscillator(), g=ctx.createGain();
+    o.type="sine"; o.frequency.value=f;
+    g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.09,t+.02); g.gain.exponentialRampToValueAtTime(.0001,t+1.1);
+    o.connect(g); g.connect(ctx.destination); o.start(t); o.stop(t+1.2);
+  }
+  function setMusic(on){
+    try{
+      if(on){
+        ctx = ctx || new (window.AudioContext||window.webkitAudioContext)();
+        if(ctx.resume) ctx.resume();
+        timer=setInterval(function(){ tone(notes[step%notes.length],ctx.currentTime+.02); step++; },520);
+      }else{ clearInterval(timer); timer=null; }
+      playing=on;
+    }catch(e){ playing=false; }
+    musicBtn.textContent = playing ? "🎵 กำลังเล่น" : "🎵 เปิดเพลง";
+    musicBtn.setAttribute("aria-pressed", String(playing));
+  }
+  musicBtn.addEventListener("click",function(){ setMusic(!playing); });
+
+  /* ---------- flow ---------- */
+  function openLetter(e){
+    sealed.classList.add("hidden"); letter.classList.remove("hidden");
+    if(!playing) setMusic(true);
+    startAmbient();
+    var r=(e&&e.clientX!==undefined)?e:{clientX:innerWidth/2,clientY:innerHeight/2};
+    burst(r.clientX||innerWidth/2, r.clientY||innerHeight/2, 14);
+    var lines=letter.querySelectorAll(".line");
+    for(var i=0;i<lines.length;i++){ (function(el,i){ setTimeout(function(){el.classList.add("on")}, reduce?0:i*650+150); })(lines[i],i); }
+  }
+  $("seal").addEventListener("click",openLetter);
+
+  /* ---------- the dodging "no" ---------- */
+  var dodges=0;
+  var phrases=["ไม่ให้กดหรอก! 😝","กดตกลงเถอะน้าา 🥺","ปุ่มนี้ล็อกแล้วงับ 💕","ตกลงเท่านั้นนะคับ!","คิดดูอีกทีสิคนเก่ง 🌸","ยอมเค้าเถอะนะ ❤️"];
+  function dodge(ev){
+    if(ev && ev.preventDefault) ev.preventDefault();
+    dodges++;
+    tease.textContent = phrases[(dodges-1)%phrases.length];
+    var aw=arena.clientWidth, ah=arena.clientHeight, bw=no.offsetWidth, bh=no.offsetHeight;
+    var y = Math.random()<.5 ? 78+Math.random()*Math.max(0,ah-bh-78) : 78;
+    no.style.left = Math.max(0,Math.random()*(aw-bw))+"px";
+    no.style.top  = Math.min(ah-bh, y)+"px";
+    yes.style.setProperty("--s", Math.min(1+dodges*.12, 1.7));
+    if(dodges>=7){ no.style.opacity=0; no.style.pointerEvents="none"; tease.textContent="เหลือแค่ปุ่มเดียวแล้วนะ 😚"; }
+  }
+  no.addEventListener("pointerenter",dodge);
+  no.addEventListener("pointerdown",dodge);
+  no.addEventListener("click",dodge);   // รองรับคีย์บอร์ด
+
+  yes.addEventListener("click",function(e){
+    letter.classList.add("hidden"); done.classList.remove("hidden");
+    burst(e.clientX||innerWidth/2, e.clientY||innerHeight/2, 46);
+    setTimeout(function(){burst(innerWidth/2,innerHeight*.6,30)},500);
+  });
+
+  $("replay").addEventListener("click",function(){
+    done.classList.add("hidden"); letter.classList.add("hidden"); sealed.classList.remove("hidden");
+    letter.querySelectorAll(".line").forEach(function(l){l.classList.remove("on")});
+    dodges=0; tease.textContent=""; yes.style.removeProperty("--s");
+    no.style.cssText=""; 
+    window.scrollTo(0,0);
+  });
+})();
+</script>
+</body>
+</html>
